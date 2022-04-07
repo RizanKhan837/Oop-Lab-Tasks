@@ -1,6 +1,7 @@
 package com.ooplab;
 
 import java.io.IOException;
+import java.time.Instant;
 import java.util.Scanner;
 
 class Student{
@@ -53,20 +54,20 @@ class Computer {
         Memory = "16 Gb";
         GPU = "RTX 3080 Ti";
         Hard_Drive = "2 Tb";
-        MotherBoard = "SUS ROG Strix B450-F";
+        MotherBoard = "ASUS ROG Strix B450-F";
         Optical_Drive = "The ASUS BW-16D1X-U";
     }
     public void Display() {
         System.out.println("        System Specs");
         System.out.println("------------------------------\n");
-        System.out.printf("OS Name         : %s\n", getOS());
-        System.out.printf("System Name     : %s\n", getName());
-        System.out.printf("Processor       : %s\n", getProcessor());
-        System.out.printf("Total Memory    : %s\n", getMemory());
-        System.out.printf("GPU             : %s\n", getGPU());
-        System.out.printf("Hard Drive      : %s\n", getHard_Drive());
-        System.out.printf("MotherBoard     : %s\n", getMotherBoard());
-        System.out.printf("Optical Drive   : %s\n\n", getOptical_Drive());
+        System.out.printf("System Name     : %s\n", Name);
+        System.out.printf("OS Name         : %s\n", OS);
+        System.out.printf("Processor       : %s\n", Processor);
+        System.out.printf("Total Memory    : %s\n", Memory);
+        System.out.printf("GPU             : %s\n", GPU);
+        System.out.printf("Hard Drive      : %s\n", Hard_Drive);
+        System.out.printf("MotherBoard     : %s\n", MotherBoard);
+        System.out.printf("Optical Drive   : %s\n\n", Optical_Drive);
     }
     public void Menu() throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
@@ -100,16 +101,6 @@ class Computer {
         }
         Menu();
     }
-
-    public String getOS() { return OS; }
-    public String getName() { return Name; }
-    public String getProcessor() { return Processor; }
-    public String getMemory() { return Memory; }
-    public String getGPU() { return GPU; }
-    public String getHard_Drive() { return Hard_Drive; }
-    public String getMotherBoard() { return MotherBoard; }
-    public String getOptical_Drive() { return Optical_Drive; }
-
     public void setOS() { OS = input.nextLine(); }
     public void setName() { Name = input.nextLine(); }
     public void setCPU() { Processor = input.nextLine(); }
@@ -253,13 +244,11 @@ class Circle{
         this.Radius = 14;
     }
     public void Display(){
-        System.out.println("\n       Circle"     );
+        System.out.println("       Circle         ");
         System.out.println("--------------------\n");
-        System.out.printf("Color  = %s\n",getColor());
-        System.out.printf("Radius = %d\n\n",getRadius());
+        System.out.printf("Color  = %s\n",Color);
+        System.out.printf("Radius = %d\n\n",Radius);
     }
-    public String getColor() { return Color;}
-    public int getRadius() { return Radius; }
     public void setColor() {
         input.nextLine();
         System.out.print("Input New Color : ");
@@ -269,53 +258,201 @@ class Circle{
         Radius = input.nextInt();}
 }
 class UniStudents{
-    Scanner input = new Scanner(System.in);
-    private final String Name;
-    private String University;
-    private final int Age;
-    private final int Semester;
+    static Scanner input = new Scanner(System.in);
+    static String University;
+    static int Semester;
+    private static String Name, Enrollment;
+    private static int RollNo = 0, Sr_No = 0;
+    public static int getRollNo() { return ++RollNo; }
+    public static int getSr_No() { return ++Sr_No; }
+    public static void setUniversity(String University) { UniStudents.University = University; }
+    public static void setSemester(int Semester) { UniStudents.Semester = Semester; }
 
-    public void setUniversity() {
-        input.nextLine();
-        System.out.print("Enter University Name : ");
-        University = input.nextLine();
-    }
-
-    public UniStudents(String Name, String University, int Age, int Semester){
-        this.Name = Name;
-        this.University = University;
-        this.Age = Age;
-        this.Semester = Semester;
-    }
-    public void Menu(){
-        System.out.println("Select The Following");
-        System.out.println("1. Display Student's Info");
-        System.out.println("2. Update Student's University");
-        System.out.println("3. Exit");
-        int ans = input.nextInt();
-        switch (ans) {
-            case 1 -> {
-                Display();
-                Menu();
-            }
-            case 2 -> {
-                setUniversity();
-                Menu();
-            }
-            default -> System.exit(0);
-        }
+    public UniStudents(String Name, String University, String Enrollment, int Semester){
+        UniStudents.Name = Name;
+        UniStudents.University = University;
+        UniStudents.Enrollment = Enrollment;
+        UniStudents.Semester = Semester;
     }
     public void Display(){
-        System.out.println("        Student's Info               ");
+        System.out.printf("        Student # %d    \n",getSr_No());
         System.out.println("-------------------------------------");
         System.out.printf("Student's Name  :  %s\n", Name);
         System.out.printf("University Name :  %s\n", University);
-        System.out.printf("Age             :  %d\n", Age);
+        System.out.printf("Enrollment No.  :  %s\n", Enrollment);
+        System.out.printf("Roll No.        :  %s\n", getRollNo());
         System.out.printf("Semester        :  %d\n\n", Semester);
     }
 }
-public class Main {
+class Sphere {
+    Scanner input = new Scanner(System.in);
+    private final double pi = 3.142;
+    private double area;
+    private double radius;
 
+    public Sphere(double radius){
+        this.radius = radius;
+    }
+    public void Menu() {
+        System.out.println("\n        Sphere      \n");
+        System.out.println("Choose The Following ");
+        System.out.println("1. Calculate Area Of Sphere");
+        System.out.println("2. Calculate Volume Of Sphere");
+        System.out.println("3. Update Radius");
+        System.out.println("4. Exit ");
+        String ans = input.nextLine();
+        switch (ans) {
+            case "1" -> areaOfSphere();
+            case "2" -> volumeOfSphere();
+            case "3" -> {
+                System.out.print("Input Radius : ");
+                setRadius();
+            }
+            case "4" -> System.exit(0);
+            default -> System.out.println("Invalid Input...");
+        }
+        Menu();
+    }
+    public void areaOfSphere() {
+        area = 4 * pi * (Math.pow(radius, 2));
+        System.out.printf("Area Of The Sphere is : %.2f\n", area);
+    }
+    public void volumeOfSphere() {
+        double volume = (4.0 / 3.0) * pi * (Math.pow(radius, 3));
+        System.out.printf("Area Of The Sphere is : %.2f\n", volume);
+    }
+    public double getArea() {
+         return area;
+    }
+    public double getRadius() {
+         return radius;
+    }
+    public void setRadius() {
+         this.radius = input.nextDouble();
+    }
+}
+class Cylinder {
+    Scanner input = new Scanner(System.in);
+    private double radius;
+    private double height;
+    private final double pi = 3.142;
+    private double area;
+    public Cylinder(double height, double radius){
+        this.height = height;
+        this.radius = radius;
+    }
+    public void setRadius() { this.radius = input.nextDouble(); }
+    public void setHeight() { this.height = input.nextDouble(); }
+    public void Menu() {
+        System.out.println("        Cylinder      \n");
+        System.out.println("Choose The Following ");
+        System.out.println("1. Calculate Area Of Cylinder");
+        System.out.println("2. Calculate Volume Of Cylinder");
+        System.out.println("3. Update Radius");
+        System.out.println("4. Update Height");
+        System.out.println("5. Exit ");
+        String ans = input.nextLine();
+        switch (ans) {
+            case "1" -> areaOfCylinder();
+            case "2" -> volumeOfCylinder();
+            case "3" -> {
+                System.out.print("Input Radius : ");
+                setRadius();
+            }
+            case "4" -> {
+                System.out.print("Input Height : ");
+                setHeight();
+            }
+            case "5" -> System.exit(0);
+            default -> System.out.println("Invalid Input...");
+        }
+    }
+    public void volumeOfCylinder() {
+        area = pi * (Math.pow(radius, 2)) * height;
+        System.out.printf("Area Of The Sphere is : %.2f\n", area);
+    }
+    public void areaOfCylinder() {
+        area = (2 * pi * radius * height) + 2* pi * (Math.pow(radius, 2));
+        System.out.printf("Area Of The Sphere is : %.2f\n", area);
+    }
+}
+class Rectangle{
+    private static int Length, Breadth;
+    public Rectangle(int Length, int Breadth){
+        Rectangle.Length = Length;
+        Rectangle.Breadth = Breadth;
+    }
+    static void Output_Area(){
+        int Area = Rectangle.Length * Rectangle.Breadth;
+        System.out.printf("\nArea Of a Rectangle is %d", Area);
+    }
+}
+class Flight{
+    static Scanner input = new Scanner(System.in);
+    private int Flight_No;
+    private int Available_Seats;
+    private String Source, Destination;
+
+    public Flight(int FlightNo, String Source, String Destination, int Available_Seats){
+        this.Flight_No = FlightNo;
+        this.Source = Source;
+        this.Available_Seats = Available_Seats;
+        this.Destination = Destination;
+    }
+    public int getFlight_No() {
+        return Flight_No;
+    }
+    public void setFlight_No() {
+        Flight_No = input.nextInt();
+    }
+    public Flight(int FlightNo, int Available_Seats){
+        this.Flight_No = FlightNo;
+        this.Available_Seats = Available_Seats;
+    }
+    public Flight(int FlightNo){
+        this.Flight_No = FlightNo;
+    }
+    public void reserve(int numberOfSeats){
+        Available_Seats -= numberOfSeats;
+    }
+    public void cancel(int numberOfSeats){
+        Available_Seats += numberOfSeats;
+    }
+    private String shortAndCapital (String name) {
+        this.Source = name;
+        if (Source.length() <= 3) {
+            return Source.toUpperCase();
+        } else {
+            return name.substring(0,3).toUpperCase();
+        }
+    }
+    public static void checkIfEquals(Object fl1, Object fl2){
+        Flight flight1 = (Flight)fl1;
+        Flight flight2 = (Flight)fl2;
+        if (flight1.Flight_No == flight2.Flight_No){
+            System.out.println("Two Flights Have Same Flight Id...\n");
+            System.out.print("Do You Want To Change It? [Y/n] : ");
+            String Ans = input.next();
+            if (Ans.equals("Y") || Ans.equals("y")){
+                System.out.print("Input New Flight Id : ");
+                ((Flight) fl1).setFlight_No();
+                ((Flight) fl1).Display();
+                ((Flight) fl2).Display();
+            }
+        }
+        else {
+            ((Flight) fl1).Display();
+            ((Flight) fl2).Display();
+        }
+    }
+    public void Display() {
+        System.out.printf("\n         Flight No. :  %d\n\n", Flight_No);
+        System.out.printf("From         :   %s\n", shortAndCapital(Source));
+        System.out.printf("To           :   %s\n", shortAndCapital(Destination));
+        System.out.printf("No. Of Available Seats Left :  %d\n\n", Available_Seats);
+    }
+}
+public class Main {
     public static void main(String[] args) throws InterruptedException, IOException {
 
         /*------------------------
@@ -495,29 +632,136 @@ public class Main {
          ------------------------*/
         // Task 01
 
-        /*Computer Pc = new Computer();
-        Pc.Menu();*/
-
-        // Task 02
-
         /*Circle circle = new Circle();
         circle.Menu();*/
 
+        // Task 02
+
+        /*Sphere sphere = new Sphere(4);
+        sphere.Menu();*/
+
         // Task 03
 
-        /*Car Honda = new Car();
-        Honda.updateMilage();
-        Honda.getPriceAfterUse();
-        Honda.outputDetails();*/
+        /*Computer Pc = new Computer();
+        Pc.Menu();*/
 
-        // Task 05
+        // Task 04
 
         /*UniStudents St1 = new UniStudents("Rizan","Bahria University", 20, 1);
         UniStudents St2 = new UniStudents("Haseeb","Bahria University", 19, 1);
         UniStudents St3 = new UniStudents("Zeeshan","Bahria University", 18, 1);
         St1.Menu();*/
-}
 
+        /*------------------------
+                 Lab 4
+         ------------------------*/
+
+        // Task 01
+
+        /*Computer Pc = new Computer();
+        Pc.Menu();*/
+
+        // Task 02
+
+        /*Cylinder cylinder = new Cylinder(3,4);
+        cylinder.Menu();*/
+
+        // Task 03
+
+        /*Rectangle rec = new Rectangle();
+        rec.Display();
+        Rectangle rec2 = new Rectangle(9,10);
+        rec2.Display();*/
+
+        // Task 04
+
+        /*Scanner input = new Scanner(System.in);
+        Flight fl1 = new Flight(23, "Karachi", "Lahore", 50);
+        Flight fl2 = new Flight(23, "Lahore", "Karachi", 50);
+        fl1.reserve(10);
+        fl1.cancel(2);
+        Flight.checkIfEquals(fl1, fl2);*/
+
+        //  Or
+        /* if (fl1.getFlight_No() == fl2.getFlight_No()){
+            System.out.println("Two Flights Have Same Flight Id...\n");
+            System.out.print("Do You Want To Change It? [Y/n] : ");
+            String Ans = input.next();
+            if (Ans.equals("Y") || Ans.equals("y")){
+                System.out.print("Input New Flight Id : ");
+                fl1.setFlight_No();
+                fl1.Display();
+                fl2.Display();
+            }
+        }
+        else {
+            fl1.Display();
+            fl2.Display();
+        }*/
+
+        /*------------------------  
+                 Lab 5
+         ------------------------*/
+
+        // Task 1
+        /*Rectangle rec= new Rectangle(34,56);
+        Rectangle.Output_Area();*/
+
+        // Task 2
+
+        /* UniStudents St1 = new UniStudents("Rizwan", "Bahria", "02-131212-026", 2);
+        UniStudents St2 = new UniStudents("Rizwan1", "Bahria", "02-131212-025", 2);
+        UniStudents St3 = new UniStudents("Rizwan2", "Bahria", "02-131212-028", 2);
+        UniStudents.setUniversity("Sir Syed");
+        UniStudents.setSemester(3);
+        St1.Display();
+        St2.Display();
+        St3.Display(); */
+
+        // Task 3
+        /*printNTimes(6, "Rizan");*/
+
+        // Task 4
+        /*Insult("Rizan", 50);*/
+
+        // Task 5
+
+    }
+
+    static void Insult(String name, int age){
+        if (age > 0 && age <= 10) {
+            System.out.printf("Hello %s You're So Sweet..\n", name);
+        } else if(age > 10 && age <= 17){
+            System.out.println("Hmm... You're So Dweeb..");
+        }else if(age > 17 && age <= 20){
+            System.out.printf("Congrats %s You're Counting Down To Legal Age..\n", name);
+        }else if(age == 21){
+            System.out.printf("Congrats %s You Just Made a Legal Age..\n", name);
+        }else if(age > 21 && age <= 29){
+            System.out.printf("Sorry %s But You're Counting Down To 30..\n", name);
+        }else if(age > 29 && age <= 40){
+            System.out.printf("Mr. %s You're Suffering Adult..\n", name);
+        }else if(age > 40 && age < 50){
+            System.out.printf("Sorry To Say %s But You're a Miserable Adult..\n", name);
+        }else if(age >= 50){
+            System.out.println("Wow... We're Speechless..\n");
+        }else{
+            System.out.println("Invalid Input...");
+        }
+    }
+    static void printNTimes(int num, String name){
+        for (int i = 0; i < num ; i++) {
+            System.out.println(name);
+        }
+    }
+    static void greetMe(String Name){
+        Scanner input = new Scanner (System.in);
+        System.out.println("Enter your Name: ");
+        String name=input.nextLine();
+        System.out.printf("Hello %s How Was Your Day...??\n",name);
+        System.out.println("Enter your Age: ");
+        int age=input.nextInt();
+    }
     static void Print(String str){
         System.out.println(str);
     }
@@ -594,8 +838,7 @@ public class Main {
         height = input.nextDouble();
         System.out.print("Enter Mass In Pounds : ");
         mass = input.nextDouble();
-        BMI = (mass / Math.pow(height,2))* 703;
+        BMI = (mass / Math.pow(height,2)) * 703;
         System.out.printf("Your Body Mass Index Is %f",BMI);
     }
-
 }
