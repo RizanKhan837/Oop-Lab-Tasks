@@ -1,7 +1,6 @@
 package com.ooplab;
 
 import java.io.IOException;
-import java.time.Instant;
 import java.util.Scanner;
 
 class Student{
@@ -452,6 +451,46 @@ class Flight{
         System.out.printf("No. Of Available Seats Left :  %d\n\n", Available_Seats);
     }
 }
+class Calculator{
+    static void Sum(int a, int b){
+        System.out.printf("The Sum Of %d + %d = %d\n", a, b, a+b); }
+    static void Sum(int a, int b, int c){
+        System.out.printf("The Sum Of %d + %d + %d = %d\n", a, b, c, a+b+c); }
+    static void Sum(int a, int b, int c, int d){
+        System.out.printf("The Sum Of %d + %d + %d + %d = %d\n", a, b, c, d, a+b+c+d); }
+    static void Sum(int a, int b, int c, int d, int f){
+        System.out.printf("The Sum Of %d + %d + %d + %d + %d = %d\n",  a, b, c, d, f, a+b+c+d+f); }
+}
+class Area{
+    static void PrintArea(int Length) {
+        System.out.printf("The Area Of Square Is %d\n", Length * Length); }
+    static void PrintArea(int Length, int Breadth) {
+        System.out.printf("The Area Of Rectangle Is %d\n", Length * Breadth); }
+}
+class Student2 {
+    String Name, Address;
+    int Age;
+    Student2(){
+        this.Name = "Unknown";
+        this.Address = "Not Available";
+        this.Age = 0;
+    }
+    public  void setInfo(String Name, int Age){
+        this.Name = Name;
+        this.Age = Age;
+    }
+    public  void setInfo(String Name, int Age, String Address){
+        this.Name = Name;
+        this.Age = Age;
+        this.Address = Address;
+    }
+    public void Display(){
+        System.out.printf("Name         : %s\n", Name);
+        System.out.printf("Age          : %d\n", Age);
+        System.out.printf("Address      : %s\n", Address);
+        System.out.println("----------------------------");
+    }
+}
 public class Main {
     public static void main(String[] args) throws InterruptedException, IOException {
 
@@ -709,14 +748,14 @@ public class Main {
 
         // Task 2
 
-        /* UniStudents St1 = new UniStudents("Rizwan", "Bahria", "02-131212-026", 2);
+        /*UniStudents St1 = new UniStudents("Rizwan", "Bahria", "02-131212-026", 2);
         UniStudents St2 = new UniStudents("Rizwan1", "Bahria", "02-131212-025", 2);
         UniStudents St3 = new UniStudents("Rizwan2", "Bahria", "02-131212-028", 2);
         UniStudents.setUniversity("Sir Syed");
         UniStudents.setSemester(3);
         St1.Display();
         St2.Display();
-        St3.Display(); */
+        St3.Display();*/
 
         // Task 3
         /*printNTimes(6, "Rizan");*/
@@ -725,6 +764,36 @@ public class Main {
         /*Insult("Rizan", 50);*/
 
         // Task 5
+        /*greetMe("Rizan");*/
+
+       /*------------------------
+                 Lab 5
+         ------------------------*/
+
+        // Task 01
+
+        /*Calculator.Sum(1,2);
+        Calculator.Sum(1,2,3);
+        Calculator.Sum(1,2,3,4);
+        Calculator.Sum(1,2,3,4,5);*/
+
+        // Lab 02
+        /*Area.PrintArea(6);
+        Area.PrintArea(2,4);*/
+
+        // Lab 03
+        /*Student2 St1 = new Student2();
+        Student2 St2 = new Student2();
+        Student2 St3 = new Student2();
+        Student2 St4 = new Student2();
+        St1.setInfo("Rizan", 20);
+        St2.setInfo("Ali", 23);
+        St3.setInfo("Zeeshan", 17, "Gulshan");
+        St4.setInfo("Ahsan", 19, "Defence");
+        St1.Display();
+        St2.Display();
+        St3.Display();
+        St4.Display();*/
 
     }
 
