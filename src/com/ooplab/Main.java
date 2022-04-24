@@ -491,6 +491,257 @@ class Student2 {
         System.out.println("----------------------------");
     }
 }
+
+// Lab 07
+class Shapes{
+    protected double area;
+    Shapes(){
+        area = 0;
+    }
+    public double getArea() {
+        return area;
+    }
+    public void onAreaChange() {
+        System.out.printf("The Value Of Area is %.2f\n", area);
+    }
+}
+class Circle2 extends Shapes{
+    private final double radius, PI;
+    Circle2(int radius){
+        this.radius = radius;
+        PI= 3.142;
+    }
+    @Override
+    public void onAreaChange(){
+        area = PI * (radius*radius);
+        super.onAreaChange();
+    }
+}
+class Rectangle2 extends Shapes{
+    private final double height, width;
+    Rectangle2(int height, int width){
+        this.height = height;
+        this.width = width;
+    }
+    @Override
+    public void onAreaChange(){
+        area = height * width;
+        super.onAreaChange();
+    }
+}
+class Triangle extends Shapes{
+    private final double base, height;
+    Triangle(int base, int height){
+        this.base = base;
+        this.height = height;
+    }
+    @Override
+    public void onAreaChange(){
+        area = 0.5 *(height * base);
+        super.onAreaChange();
+    }
+}
+class Item{
+    protected String Name, Brand, TradeMark;
+    protected int Price;
+    protected String Made_In;
+    Item(){
+        Name = "Not Available";
+        Brand = "Not Available";
+        TradeMark = "Not Available";
+        Price = 0;
+        Made_In = "Not Available";
+    }
+    Item(String Name, String Brand, String TradeMark, int Price, String Made_In){
+        this.Name = Name;
+        this.Brand = Brand;
+        this.TradeMark = TradeMark;
+        this.Price = Price;
+        this.Made_In = Made_In;
+    }
+    public void display(){
+        System.out.println("Name :"+ Name);
+        System.out.println("Price :"+ Price);
+        System.out.println("Brand :"+ Brand);
+        System.out.println("Trade Mark No. :"+ TradeMark);
+        System.out.println("Made in :"+ Made_In);
+    }
+}
+class Cloth extends Item{
+    private final String Season;
+    private final String Type;
+    Cloth(String Season,String Type){
+        this.Season = Season;
+        this.Type = Type;
+    }
+    @Override
+    public void display() {
+        super.display();
+        System.out.println("Collection : "+ Season);
+        System.out.println("Cloth Type : "+ Type);
+    }
+}
+class Pharmacy extends Item{
+    String Size, Purpose, Effect ;
+    Pharmacy(String Purpose,String Size,String Effect){
+        this.Purpose = Purpose;
+        this.Size = Size;
+        this.Effect = Effect;
+    }
+    @Override
+    public void display() {
+        super.display();
+        System.out.println("Purpose : "+ Purpose);
+        System.out.println("Effect : "+ Effect);
+        System.out.println("Size in mg : "+ Size);
+    }
+}
+class Electronic extends Item{
+    private final int Volts;
+    private final String Automatic_or_Manual;
+    private final String Water_Res;
+    public Electronic(String Type, String Waterproof, int Volts){
+        this.Volts = Volts;
+        this.Water_Res = Waterproof;
+        this.Automatic_or_Manual = Type;
+    }
+    public void display(){
+        super.display();
+        System.out.println("Voltage : "+ Volts);
+        System.out.println("Type : "+ Automatic_or_Manual);
+        System.out.println("Water proof : "+ Water_Res);
+    }
+}
+class Human{
+    public void walk(){
+        System.out.println("Walking...");
+    }
+    public void talk(){
+        System.out.println("Talking...");
+    }
+}
+class Alien extends Human{
+    public void grow(){
+        System.out.println("Growing...");
+    }
+    public void eat(){
+        System.out.println("Eating...");
+    }
+}
+class Pirates extends Human{
+    public void sailing(){
+        System.out.println("Sailing...");
+    }
+    public void attack(){
+        System.out.println("Attacking...");
+    }
+    public void destroy(){
+        System.out.println("Destroying Ship...");
+    }
+}
+class Cuisines{
+    private final String name;
+    private final int quantity;
+    private final double price;
+    Cuisines(String name, int quantity, double price){
+        this.name = name;
+        this.quantity = quantity;
+        this.price = price;
+    }
+    public void Display(){
+        System.out.println("Name = " + name);
+        System.out.println("Quantity = " + quantity);
+        System.out.println("Price = " + price);
+    }
+}
+class Pakistani extends Cuisines{
+    String pakDishes;
+    String Ingredients;
+    public Pakistani(String name, int quantity, double price, String pakDishes ,String Ingredients) {
+        super(name, quantity, price);
+        this.pakDishes = pakDishes;
+        this.Ingredients = Ingredients;
+    }
+    public void Display(){
+        super.Display();
+        System.out.println("Pakistani = " + pakDishes);
+    }
+}
+class BBQ extends Cuisines{
+    String bbqDish, Sauce;
+    public BBQ(String name, int quantity, double price, String bbqDish, String Sauce) {
+        super(name, quantity, price);
+        this.Sauce = Sauce;
+        this.bbqDish = bbqDish;
+    }
+    public void Display(){
+        super.Display();
+        System.out.println("BBQ = " + bbqDish);
+    }
+}
+class Chinese extends Cuisines{
+    String ChineseDish, Beverages;
+    public Chinese(String name, int quantity, double price, String ChineseDish, String Beverages) {
+        super(name, quantity, price);
+        this.ChineseDish = ChineseDish;
+        this.Beverages = Beverages;
+    }
+    public void Display(){
+        super.Display();
+        System.out.println("Chinese Dish = " + ChineseDish);
+        System.out.println("Beverages = " + Beverages);
+    }
+}
+class Item1{
+    private String Name;
+    private final double unitPrice;
+    public Item1() {
+        this.Name = "no Item";
+        this.unitPrice = 0;
+    }
+    public Item1(String Name, double unitPrice) {
+        this.Name = Name;
+        this.unitPrice = unitPrice;
+    }
+    public double getPrice() {
+        return unitPrice;
+    }
+    public String getName() {
+        return Name;
+    }
+    public void setName(String Name) {
+        this.Name = Name;
+    }
+    public void tostring(){
+        System.out.printf("%s@ %.2f \n",Name, unitPrice);
+    }
+}
+class WeighedItem extends Item1{
+    double weight;
+    WeighedItem(String Name, double unitPrice, double weight){
+        super(Name, unitPrice);
+        this.weight = weight;
+    }
+    public double getPrice(){
+        return weight * super.getPrice();
+    }
+    public void tostring(){
+        System.out.printf("%s@ %.2f   %.2f KG  =  %.2f PKR \n",super.getName(), super.getPrice(), weight, getPrice());
+    }
+}
+class CountedItem extends Item1{
+    int quantity;
+    CountedItem(String Name, double unitPrice, int quantity){
+        super(Name, unitPrice);
+        this.quantity = quantity;
+    }
+    public double getPrice(){
+        return quantity * super.getPrice();
+    }
+    public void tostring(){
+        System.out.printf("%s@ %.2f   %d units  =  %.2f PKR \n",super.getName(), super.getPrice(), quantity, getPrice());
+    }
+}
 public class Main {
     public static void main(String[] args) throws InterruptedException, IOException {
 
@@ -767,7 +1018,7 @@ public class Main {
         /*greetMe("Rizan");*/
 
        /*------------------------
-                 Lab 5
+                 Lab 6
          ------------------------*/
 
         // Task 01
@@ -795,6 +1046,45 @@ public class Main {
         St3.Display();
         St4.Display();*/
 
+        /*------------------------
+                 Lab 7
+         ------------------------*/
+
+        // Task 1
+
+        /*Circle2 cr = new Circle2(2);
+        Triangle tr = new Triangle(2, 4);
+        tr.onAreaChange();
+        cr.onAreaChange();*/
+
+        // Task 2
+
+        /*Human Man = new Human();
+        Man.talk();
+        Man.walk();
+        Pirates pr = new Pirates();
+        pr.walk();
+        pr.attack();*/
+
+        // Task 3
+
+        /*Item item = new Item();
+        Cloth cloth = new Cloth("Summer", "Washing Wear");
+        Pharmacy Ph = new Pharmacy("Severe Pain", "25 mg", "Reduce Pain");
+        cloth.display();
+        Ph.display();*/
+
+        // Task 4
+
+        /*Chinese chinese = new Chinese("Chinese Food", 2, 500, "Chinese Rice", "Pepsi");
+        chinese.Display();*/
+
+        // Task 5
+
+        /*Item1 item = new Item1("Banana", 120);
+        WeighedItem item2 = new WeighedItem("Orange", 100, 3);
+        item.tostring();
+        item2.tostring();*/
     }
 
     static void Insult(String name, int age){
