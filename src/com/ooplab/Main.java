@@ -217,8 +217,8 @@ class Circle{
     private int Radius;
     public void Menu(){
         System.out.println("Select The Following");
-        System.out.println("1. Display Circle");
-        System.out.println("2. Update Circle");
+        System.out.println("1. Display Circle3");
+        System.out.println("2. Update Circle3");
         System.out.println("3. Exit");
         int ans = input.nextInt();
         if (ans == 1) {
@@ -243,7 +243,7 @@ class Circle{
         this.Radius = 14;
     }
     public void Display(){
-        System.out.println("       Circle         ");
+        System.out.println("       Circle3         ");
         System.out.println("--------------------\n");
         System.out.printf("Color  = %s\n",Color);
         System.out.printf("Radius = %d\n\n",Radius);
@@ -567,7 +567,7 @@ class Item{
         System.out.println("Made in :"+ Made_In);
     }
 }
-class Cloth extends Item{
+class Cloth extends Item {
     private final String Season;
     private final String Type;
     Cloth(String Season,String Type){
@@ -581,7 +581,7 @@ class Cloth extends Item{
         System.out.println("Cloth Type : "+ Type);
     }
 }
-class Pharmacy extends Item{
+class Pharmacy extends Item {
     String Size, Purpose, Effect ;
     Pharmacy(String Purpose,String Size,String Effect){
         this.Purpose = Purpose;
@@ -596,7 +596,7 @@ class Pharmacy extends Item{
         System.out.println("Size in mg : "+ Size);
     }
 }
-class Electronic extends Item{
+class Electronic extends Item {
     private final int Volts;
     private final String Automatic_or_Manual;
     private final String Water_Res;
@@ -692,7 +692,7 @@ class Chinese extends Cuisines{
         System.out.println("Beverages = " + Beverages);
     }
 }
-class Item1{
+class Item1 {
     private String Name;
     private final double unitPrice;
     public Item1() {
@@ -716,7 +716,7 @@ class Item1{
         System.out.printf("%s@ %.2f \n",Name, unitPrice);
     }
 }
-class WeighedItem extends Item1{
+class WeighedItem extends Item1 {
     double weight;
     WeighedItem(String Name, double unitPrice, double weight){
         super(Name, unitPrice);
@@ -729,7 +729,7 @@ class WeighedItem extends Item1{
         System.out.printf("%s@ %.2f   %.2f KG  =  %.2f PKR \n",super.getName(), super.getPrice(), weight, getPrice());
     }
 }
-class CountedItem extends Item1{
+class CountedItem extends Item1 {
     int quantity;
     CountedItem(String Name, double unitPrice, int quantity){
         super(Name, unitPrice);
@@ -739,7 +739,191 @@ class CountedItem extends Item1{
         return quantity * super.getPrice();
     }
     public void tostring(){
-        System.out.printf("%s@ %.2f   %d units  =  %.2f PKR \n",super.getName(), super.getPrice(), quantity, getPrice());
+        System.out.printf("%s@ %.2f   %d units  =  %.2f PKR\n",super.getName(), super.getPrice(), quantity, getPrice());
+    }
+}
+
+class Employee3 {
+    String FirstName, LastName, CNIC;
+    public Employee3() {
+        FirstName = "N/A";
+        LastName = "N/A";
+        CNIC = "Not Available";
+    }
+    public Employee3(String FirstName, String LastName, String CNIC) {
+        this.FirstName = FirstName;
+        this.LastName = LastName;
+        this.CNIC = CNIC;
+    }
+    @Override
+    public String toString(){
+        return FirstName + " " + LastName + "\nCNIC # : "+ CNIC;
+    }
+    public double earning(){
+        return 0.00;
+    }
+}
+
+class SalariedEmployee extends Employee3 {
+    double weeklySalary;
+    public SalariedEmployee() {
+        FirstName = "N/A";
+        LastName = "N/A";
+        CNIC = "Not Available";
+        weeklySalary = 0.00;
+    }
+    public SalariedEmployee(String FirstName, String LastName, String CNIC, double weeklySalary) {
+        super(FirstName, LastName, CNIC);
+        this.weeklySalary = weeklySalary;
+    }
+    public void setWeeklySalary(double weeklySalary) {
+        if (weeklySalary >= 0) {
+            this.weeklySalary = weeklySalary;
+        }
+    }
+    public void setFirstName(String FirstName) {
+        this.FirstName = FirstName;
+    }
+    public void setLastName(String LastName) {
+        this.LastName = LastName;
+    }
+    public void setCNIC(String CNIC) {
+        this.CNIC = CNIC;
+    }
+    @Override
+    public String toString() {
+        return "\n \t Salaried Employee \n" +super.toString();
+    }
+    @Override
+    public double earning() {
+        return weeklySalary;
+    }
+}
+
+class HourlyEmployee extends Employee3 {
+    double wage, hours;
+    public void setWage(double wage) {
+        this.wage = wage;
+    }
+    public void setHours(double hours) {
+        this.hours = hours;
+    }
+    public HourlyEmployee() {
+        FirstName = "N/A";
+        LastName = "N/A";
+        CNIC = "Not Available";
+        wage = 0.0;
+        hours = 0.0;
+    }
+    public HourlyEmployee(String FirstName, String LastName, String CNIC, double wage, double hours) {
+        super(FirstName, LastName, CNIC);
+        this.wage = wage;
+        this.hours = hours;
+    }
+    @Override
+    public String toString() {
+        return "\n \tHourly Employee  \n" + super.toString();
+    }
+    @Override
+    public double earning() {
+        if (hours <= 40) {
+            return wage*hours;
+        } else {
+            return 40*wage + (hours - 40) * wage * 1.5;
+        }
+    }
+}
+
+class CommissionEmployee extends Employee3 {
+    double grossSales, commissionRate;
+    public void setGrossSales(double grossSales) {
+        if (grossSales >= 0) {
+            this.grossSales = grossSales;
+        }
+    }
+    public void setCommissionRate(double commissionRate) {
+        if (commissionRate >= 0) {
+            this.commissionRate = commissionRate;
+        }
+    }
+    public CommissionEmployee() {
+        FirstName = "N/A";
+        LastName = "N/A";
+        CNIC = "Not Available";
+        grossSales = 0.0;
+        commissionRate = 0.0;
+    }
+    public CommissionEmployee(String FirstName, String LastName, String CNIC, double grossSales, double commissionRate) {
+        super(FirstName, LastName, CNIC);
+        this.grossSales = grossSales;
+        this.commissionRate = commissionRate;
+    }
+    @Override
+    public String toString() {
+        return "\n \tCommission Employee \n" + super.toString();
+    }
+    @Override
+    public double earning() {
+        return grossSales * commissionRate;
+    }
+}
+class BasePlusCommissionEmployee extends CommissionEmployee {
+    double baseSalary;
+    public void setBaseSalary(double baseSalary) {
+        if (baseSalary >= 0) {
+            this.baseSalary = baseSalary;
+        }
+    }
+    public double getBaseSalary() {
+        return baseSalary;
+    }
+    public BasePlusCommissionEmployee() {
+        FirstName = "N/A";
+        LastName = "N/A";
+        CNIC = "Not Available";
+        grossSales = 0.0;
+        commissionRate = 0.0;
+        baseSalary = 0.0;
+    }
+    public BasePlusCommissionEmployee(String FirstName, String LastName, String CNIC, double grossSales, double commissionRate, double baseSalary) {
+        super(FirstName, LastName, CNIC, grossSales, commissionRate);
+        this.baseSalary = baseSalary;
+    }
+    @Override
+    public String toString() {
+        return "\n Base Plus Commission Employee " + super.toString();
+    }
+    @Override
+    public double earning() {
+        return baseSalary + super.earning();
+    }
+}
+
+class Shape{
+    int Area;
+    public double getArea() {
+        return Area;
+    }
+}
+class Square extends Shape{
+    int length;
+    @Override
+    public double getArea() {
+        return length* length;
+    }
+}
+class Circle3 extends Shape{
+    int radius;
+    @Override
+    public double getArea() {
+        return (3.142)* radius * radius;
+    }
+}
+class Rectangle3 extends Square{
+    int width;
+    @Override
+    public double getArea() {
+        return width * length;
     }
 }
 public class Main {
@@ -900,7 +1084,7 @@ public class Main {
 
         // Task 03
 
-        /*Employee E1 = new Employee();
+        /*Employee3 E1 = new Employee3();
         E1.setSalary(45000);
         E1.setDesignation("HOD");
         E1.Display();*/
@@ -922,7 +1106,7 @@ public class Main {
          ------------------------*/
         // Task 01
 
-        /*Circle circle = new Circle();
+        /*Circle3 circle = new Circle3();
         circle.Menu();*/
 
         // Task 02
@@ -1068,11 +1252,12 @@ public class Main {
 
         // Task 3
 
-        /*Item item = new Item();
-        Cloth cloth = new Cloth("Summer", "Washing Wear");
-        Pharmacy Ph = new Pharmacy("Severe Pain", "25 mg", "Reduce Pain");
-        cloth.display();
-        Ph.display();*/
+        /*Cloth cloth = new Cloth("Summer", "Washing Wear");
+        cloth.Name = "Cotton";
+        cloth.Brand = "Gul Ahmed";
+        cloth.Made_In = "Pakistan";
+        cloth.Price = 2000;
+        cloth.display();*/
 
         // Task 4
 
@@ -1085,8 +1270,43 @@ public class Main {
         WeighedItem item2 = new WeighedItem("Orange", 100, 3);
         item.tostring();
         item2.tostring();*/
-    }
 
+        /*------------------------
+                 Lab 8
+         ------------------------*/
+
+        // Task 1
+
+        /*Employee3 firstEmployee = new SalariedEmployee("Rizwan", "Akram", "111-11-1111", 800.00);
+        Employee3 secondEmployee = new CommissionEmployee("Haseeb", "Alam", "222-22-2222", 10000, 0.06);
+        Employee3 thirdEmployee = new BasePlusCommissionEmployee("Zeeshan", "Ibrar", "333-33-3333", 5000, 0.04, 300);
+        Employee3 fourthEmployee = new HourlyEmployee("Hannan", "Khan", "444-44-4444", 16.75, 40);
+
+        System.out.println(firstEmployee);
+        System.out.printf("%s %s Salary : %.2f\n\n",firstEmployee.FirstName,firstEmployee.LastName,firstEmployee.earning());
+        System.out.println(secondEmployee);
+        System.out.printf("%s %s Salary : %.2f\n\n",secondEmployee.FirstName,secondEmployee.LastName,secondEmployee.earning());
+
+
+        System.out.println(thirdEmployee);
+        BasePlusCommissionEmployee currentEmployee = (BasePlusCommissionEmployee) thirdEmployee;
+
+        double oldBaseSalary = currentEmployee.getBaseSalary();
+        System.out.println("Old Base Salary: " + oldBaseSalary);
+
+        currentEmployee.setBaseSalary(1.10 * oldBaseSalary);
+        System.out.println("New Base Salary with 10% Increase Is: " + currentEmployee.getBaseSalary());
+        System.out.printf("%s %s Salary : %.2f\n\n",thirdEmployee.FirstName,thirdEmployee.LastName,thirdEmployee.earning());
+        System.out.println(fourthEmployee);
+        System.out.printf("%s %s Salary : %.2f\n\n",fourthEmployee.FirstName,fourthEmployee.LastName,fourthEmployee.earning());*/
+
+        // Task 02
+
+        /*Rectangle3 rec = new Rectangle3();
+        rec.length = 2;
+        rec.width = 3;
+        rec.getArea();*/
+    }
     static void Insult(String name, int age){
         if (age > 0 && age <= 10) {
             System.out.printf("Hello %s You're So Sweet..\n", name);
