@@ -1,6 +1,12 @@
 package com.ooplab;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 class Student{
@@ -926,6 +932,213 @@ class Rectangle3 extends Square{
         return width * length;
     }
 }
+
+class Flight1 {
+    int flightId;
+    Time time;
+    List<Passenger> passengers;
+    int noOfPassengers = 0;
+
+    public Flight1(int flightId, Time time, List<Passenger> passengers) {
+        this.flightId = flightId;
+        this.time = time;
+        this.passengers = passengers;
+        for (Passenger p : passengers){
+            noOfPassengers++;
+        }
+    }
+    public void Display(){
+        System.out.println("\n Flight Info");
+        System.out.println("Flight No   : " + flightId);
+        System.out.println("Arrival     : " + time.arrival);
+        System.out.println("Departure   : " + time.departure);
+        System.out.println("No. Of Passengers : " + noOfPassengers);
+    }
+}
+
+class Time {
+    String arrival, departure;
+    Date d1, d2;
+    int totalMinute, totalHours;
+    public void inputTime() throws ParseException {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter arrival time (hh:mm ss): ");
+        arrival = input.nextLine();
+        System.out.println();
+        System.out.print("Enter departure time (hh:mm ss): ");
+        departure = input.nextLine();
+        DateFormat format = new SimpleDateFormat("hh:mm aa");
+        d1 = format.parse(arrival);
+        d2 = format.parse(departure);
+    }
+    public void getMinute(){
+        totalMinute = d2.getMinutes() + d1.getMinutes();
+        if (totalMinute >= 60){
+            totalMinute -= 60;
+            totalHours++;
+        }
+        System.out.printf("Minute  : %d\n", totalMinute);
+    }
+    public void getHour(){
+        totalHours = d2.getHours() - d1.getHours();
+        System.out.printf("Hour  : %d\n", totalHours);
+    }
+}
+
+class Passenger {
+    String Name, From, To;
+
+    public Passenger(String name, String from, String to) {
+        Name = name;
+        From = from;
+        To = to;
+    }
+    public String toString() {
+        return "Name " + Name + ", From " + From + ", To " + To;
+    }
+}
+
+class Car1 {
+    String Model, Year, VIN;
+    public Engine engine;
+    Doors door;
+    Capacity capacity;
+    public Wheel wheel;
+    public Car1(String model, String year, String VIN) {
+        engine = new Engine("Diesel", "746 Hp", true);
+        door = new Doors();
+        capacity = new Capacity(10);
+        wheel = new Wheel("Panther", "Steel", 4);
+        Model = model;
+        Year = year;
+        this.VIN = VIN;
+    }
+    public void Display(){
+        System.out.println("\n\tCar Details\n");
+        System.out.println("Model        : " + Model );
+        System.out.println("Year         : "+ Year);
+        System.out.println("VIN          : " + VIN);
+        System.out.println("Engine Type  : " + engine.Type);
+        System.out.println("Horse Power  : " + engine.Horse_Power);
+        System.out.println("Automatic    : " + engine.isAutomatic);
+    }
+}
+
+class Engine {
+    String Type, Horse_Power;
+    boolean isAutomatic;
+    public Engine(String Type, String Horse_Power, boolean isAutomatic) {
+        this.Type = Type;
+        this.Horse_Power = Horse_Power;
+        this.isAutomatic = isAutomatic;
+    }
+    public void startEngine() {
+        System.out.println("Engine is Started...");
+    }
+}
+
+class Doors {
+    public void openDoor() {
+        System.out.println("Opening Door...");
+    }
+    public void closeDoor() {
+        System.out.println("Closing Door...");
+    }
+}
+
+class Capacity {
+    int totalCapacity, capacity;
+    public Capacity(int capacity) {
+        this.capacity = capacity;
+        totalCapacity = capacity;
+    }
+
+    public void setTotalCapacity(int totalCapacity) {
+        this.totalCapacity = totalCapacity;
+    }
+    public void addObjects(int n){
+        if (n <= totalCapacity){
+            System.out.println("Objects Added : "+ n);
+            capacity -= n;
+            System.out.println("Capacity Remaining : "+ capacity);
+        }
+        else {
+            System.out.println("Not Enough Space...(●'◡'●)");
+        }
+    }
+    public void removeObjects(int n) {
+        if (capacity+n <= totalCapacity){
+            System.out.println("Objects Removed : " +n);
+            totalCapacity += n;
+            System.out.println("Capacity Remaining : "+ totalCapacity);
+        }
+        else {
+            System.out.println("No. Of Objects Are Greater Then Total Capacity i.e., Not Possible");
+        }
+    }
+}
+
+class Wheel {
+    String Type, Quality;
+    int no_OfWheel;
+    public Wheel(String Type, String Quality, int no_OfWheel) {
+        this.Type = Type;
+        this.Quality = Quality;
+        this.no_OfWheel = no_OfWheel;
+    }
+}
+
+class Product {
+    String productName;
+    double price;
+    List<Product> products = new ArrayList<Product>();
+    Product(String productName, double price){
+        this.productName = productName;
+        this.price=price;
+    }
+    public String toString(){
+        return "Product Name : " +productName+ "\tPrice : "+price;
+    }
+}
+
+class Store {
+    String storeName, location;
+    List<Product> productInStore;
+    Store(String storeName,String location,List<Product> productInStore){
+        this.storeName = storeName;
+        this.location=location;
+        this.productInStore = productInStore;
+    }
+    public void printProducts(){
+        int i = 1;
+        System.out.println("Store Name : "+storeName);
+        for(Product product: productInStore){
+            System.out.printf("%d. %s\n", i, product.toString());
+            i++;
+        }
+    }
+    public String toString(){
+        return "Store Name : " +storeName+ "\tLocation : "+location;
+    }
+}
+class Company {
+    String companyName, owner;
+    List<Store> allStores;
+    Company(String companyName, String owner, List<Store> stores){
+        this.companyName = companyName;
+        this.owner=owner;
+        this.allStores = stores;
+    }
+    public void printStores(){
+        int i = 1;
+        System.out.println("Company Name : "+ companyName +"\nOwner : "+owner);
+        for(Store store: allStores){
+            System.out.printf("%d. %s", i, store.toString());
+            i++;
+            System.out.println();
+        }
+    }
+}
 public class Main {
     public static void main(String[] args) throws InterruptedException, IOException {
 
@@ -1306,6 +1519,75 @@ public class Main {
         rec.length = 2;
         rec.width = 3;
         rec.getArea();*/
+
+        /*------------------------
+                 Lab 9
+         ------------------------*/
+
+        // Task 01
+
+        /*Car car = new Car("Altis", "2016", "ABC-213");
+        car.door.openDoor();
+        car.capacity.addObjects(3);
+        car.door.closeDoor();
+        car.door.openDoor();
+        car.capacity.removeObjects(4);
+        car.door.closeDoor();
+        car.Display();*/
+
+        // Task 02
+
+        /*Time time = new Time();
+        time.inputTime();
+        Passenger passenger1 = new Passenger("Rizwan", "Karachi", "Islamabad");
+        Passenger passenger2 = new Passenger("Zeeshan", "Karachi", "Lahore");
+        Passenger passenger3 = new Passenger("Haseeb", "Karachi", "Rawalpindi");
+        List<Passenger> passengers = new ArrayList<>();
+        passengers.add(passenger1);
+        passengers.add(passenger2);
+        passengers.add(passenger3);
+        for (Passenger pgr :
+                passengers) {
+            System.out.println(pgr.toString());
+        }
+        Flight flight = new Flight(1234, time, passengers);
+        flight.Display();
+        flight.time.getHour();
+        flight.time.getMinute();*/
+
+        // Task 03
+
+        /*Product p1 = new Product("Refrigerator",20000);
+        Product p2 = new Product("Washing Machine",30000);
+        Product p3 = new Product("Shirts",50000);
+        Product p4 = new Product("T Shirts",500);
+        Product p5 = new Product("Fruits",300);
+        Product p6 = new Product("Grocery Items",10000);
+        List<Product> Electronics = new ArrayList<Product>();
+        Electronics.add(p1);
+        Electronics.add(p2);
+        List<Product> Clothes = new ArrayList<Product>();
+        Clothes.add(p3);
+        Clothes.add(p4);
+        List<Product> Grocery = new ArrayList<Product>();
+        Grocery.add(p5);
+        Grocery.add(p6);
+        System.out.println();
+        List<Store> stores = new ArrayList<Store>();
+        Store s1 = new Store("Electronic Store","Faisalabad",Electronics);
+        Store s2 = new Store("Clothes Store","Karachi",Clothes);
+        Store s3 = new Store("Grocery Store","Lahore",Grocery);
+        stores.add(s1);
+        stores.add(s2);
+        stores.add(s3);
+        System.out.println();
+        System.out.println("    Products in each store");
+        s1.printProducts();
+        s2.printProducts();
+        s3.printProducts();
+        System.out.println();
+        Company company1 = new Company("Imtiaz Super","Mr. Rehman", stores);
+        company1.printStores();*/
     }
     static void Insult(String name, int age){
         if (age > 0 && age <= 10) {
